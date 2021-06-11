@@ -1,27 +1,13 @@
 package edu.westga.cs6910.pig.model;
 
-// TODO: Classes ComputerPlayer and HumanPlayer share most of their code.
-//		 Refactor their code:
-// 		 1. Create abstract base class AbstractPlayer to implement the
-//			shared code and define abstract methods for methods without
-//			duplicate code. AbstractPlayer should implement interface Player.
-//		 2. Have ComputerPlayer and HumanPlayer extend AbstractPlayer to
-//		    implement the unshared constructor code and the abstract methods.
-
 /**
  * ComputerPlayer represents a very simple automated player in the game Pig.
  * It rolls exactly 1 time and then holds.
  * 
- * @author CS6910
+ * @author CS6910, Alyssa Harris
  * @version Summer 2021
  */
-public class ComputerPlayer implements Player {
-	private static final String NAME = "Simple computer";
-	private String name;
-	private DicePair thePair;
-	private boolean isMyTurn;
-	private int total;
-	private int turnTotal;
+public class ComputerPlayer extends AbstractPlayer {
 	private int maximumRolls;
 	
 	/**
@@ -29,17 +15,7 @@ public class ComputerPlayer implements Player {
 	 * 
 	 */
 	public ComputerPlayer() {
-		this.name = NAME;
-		this.total = 0;
-		this.thePair = new DicePair();
-	}
-
-	@Override
-	/**
-	 * @see Player#resetTurnTotal()
-	 */	
-	public void resetTurnTotal() {
-		this.turnTotal = 0;
+		super();
 	}
 	
 	/**
@@ -67,61 +43,12 @@ public class ComputerPlayer implements Player {
 	/**
 	 * @see Player#takeTurn()
 	 */	
-	public void takeTurn() {				
+	public void takeTurn() {
+		boolean computerTurn = true;
 		for (int count = 0; count < this.maximumRolls; count++) {
-			this.thePair.rollDice();
-			
-			int die1Value = this.thePair.getDie1Value();
-			int die2Value = this.thePair.getDie2Value();
-			if (die1Value == 1 || die2Value == 1) {
-				this.total -= this.turnTotal;
-				this.isMyTurn = false;
-				return;
-			} else {		
-				this.turnTotal += die1Value + die2Value;
-				this.total += die1Value + die2Value;		
-			}		
+			this.processTurn(computerTurn);		
 		}
-		this.isMyTurn = false;
+		setMyTurn(false);
 	}
 
-	@Override	
-	/**
-	 * @see Player#getIsMyTurn()
-	 */
-	public boolean getIsMyTurn() {
-		return this.isMyTurn;
-	}
-	
-	@Override	
-	/**
-	 * @see Player#getName()
-	 */
-	public String getName() {
-		return this.name;
-	}
-	
-	@Override	
-	/**
-	 * @see Player#getTurnTotal()
-	 */
-	public int getTurnTotal() {
-		return this.turnTotal;
-	}
-	
-	@Override	
-	/**
-	 * @see Player#getTotal()
-	 */
-	public int getTotal() {
-		return this.total;
-	}	
-	
-	@Override	
-	/**
-	 * @see Player#getDiceValues()
-	 */
-	public String getDiceValues() {	
-		return this.thePair.getDie1Value() + ", " + this.thePair.getDie2Value();
-	}
 }
