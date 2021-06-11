@@ -139,8 +139,8 @@ public class PigPane extends BorderPane {
 			@Override
 			public void handle(ActionEvent event) {
 				PigPane.this.pnChooseFirstPlayer.setDisable(true);
-				// TODO: Enable the human player pane and start a game
-				//		 with the human playing first.
+				PigPane.this.pnComputerPlayer.setDisable(true);
+				PigPane.this.theGame.startNewGame(NewGamePane.this.theHuman);
 
 			}
 		}
