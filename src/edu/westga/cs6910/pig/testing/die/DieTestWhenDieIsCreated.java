@@ -12,7 +12,7 @@ import edu.westga.cs6910.pig.model.Die;
  * @author Alyssa Harris
  * @version 06-14-21
  */
-public class TestWhenDieIsCreated {
+public class DieTestWhenDieIsCreated {
 
 	/**
 	 * Tests the Die class's constructor and toString method to confirm that it creates

@@ -12,7 +12,7 @@ import edu.westga.cs6910.pig.model.Die;
  * @author Alyssa Harris
  * @version 06-14-21
  */
-public class TestWhenGetPips {
+public class DieTestWhenGetPips {
 
 	/**
 	 * Tests the Die class's getNumberOfPips() method to confirm that it creates
