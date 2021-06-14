@@ -12,6 +12,7 @@ public abstract class AbstractPlayer implements Player {
 	private boolean isMyTurn;
 	private int total;
 	private int turnTotal;
+	private int maximumRolls;
 	private String name;
 	
 	/**
@@ -118,16 +119,48 @@ public abstract class AbstractPlayer implements Player {
 	}
 	
 	/**
+	 * Implements Player's setMaximumRolls, but is not normally
+	 * called by client objects.  Instead, clients usually
+	 * call the 0-parameter version
+	 * 
+	 * @param	maximumRolls	The maximum number of times the computer
+	 * 							will roll before holding
+	 */
+	public void setMaximumRolls(int maximumRolls) {
+		this.maximumRolls = maximumRolls;
+	}
+
+	/**
+	 * Implements Player's setMaximumRolls() to set the 
+	 * maximum number of rolls to 1
+	 * 
+	 */
+	public void setMaximumRolls() {
+		this.maximumRolls = 1;
+	}
+	
+	/**
 	 * Processes turns
 	 * 
 	 * @param computerTurn true if is computer turn / false if not
 	 */
 	public void processTurn(boolean computerTurn) {
-		this.getThePair().rollDice();
+		if (!computerTurn) {
+			this.humanTurn();
+		} else {
+			this.computerTurn();
+		}
+	}
+	
+	/**
+	 * Processes a human's turn
+	 */
+	private void humanTurn() {
+		this.thePair.rollDice();
 		
-		int die1Value = this.getThePair().getDie1Value();
-		int die2Value = this.getThePair().getDie2Value();
-		if (die1Value == 1 || die2Value == 1) {
+		int die1Value = this.thePair.getDie1Value();
+		int die2Value = this.thePair.getDie2Value();
+		if (die1Value == 1 || die2Value == 1) {	
 			this.total -= this.turnTotal;
 			this.isMyTurn = false;
 		} else {
@@ -135,5 +168,26 @@ public abstract class AbstractPlayer implements Player {
 			this.total += die1Value + die2Value;
 			this.isMyTurn = true;
 		}
+	}
+	
+	/**
+	 * Processes a computer's turn
+	 */
+	private void computerTurn() {
+		for (int count = 0; count < this.maximumRolls; count++) {
+			this.thePair.rollDice();
+			
+			int die1Value = this.thePair.getDie1Value();
+			int die2Value = this.thePair.getDie2Value();
+			if (die1Value == 1 || die2Value == 1) {
+				this.total -= this.turnTotal;
+				this.isMyTurn = false;
+				return;
+			} else {		
+				this.turnTotal = die1Value + die2Value;
+				this.total += die1Value + die2Value;		
+			}		
+		}
+		this.isMyTurn = false;
 	}
 }

@@ -17,6 +17,7 @@ public class HumanPlayer extends AbstractPlayer {
 	 * @ensure		name().equals(name) && getTotal() == 0
 	 */
 	public HumanPlayer(String name) {
+		
 		super(name);
 	}
 
