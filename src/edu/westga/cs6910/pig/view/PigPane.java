@@ -36,6 +36,10 @@ public class PigPane extends BorderPane {
 	 * @ensures	 the pane is displayed properly
 	 */
 	public PigPane(Game theGame) {
+		if (theGame == null) {
+			throw new IllegalArgumentException("Invalid Game argument.");
+		} 
+		
 		this.theGame = theGame;
 		
 		this.pnContent = new BorderPane();

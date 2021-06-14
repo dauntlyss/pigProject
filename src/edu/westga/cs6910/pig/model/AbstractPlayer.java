@@ -23,6 +23,10 @@ public abstract class AbstractPlayer implements Player {
 	 * @ensure		name().equals(name) && getTotal() == 0
 	 */
 	public AbstractPlayer(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Invalid name.");
+		}
+		
 		this.name = name;
 		this.thePair = new DicePair();
 	}
@@ -34,8 +38,10 @@ public abstract class AbstractPlayer implements Player {
 	 * @ensure		name().equals(name) && getTotal() == 0
 	 */
 	public AbstractPlayer() {
+		
 		this.name = NAME;
 		this.thePair = new DicePair();
+	
 	}
 	
 	/**
@@ -125,8 +131,14 @@ public abstract class AbstractPlayer implements Player {
 	 * 
 	 * @param	maximumRolls	The maximum number of times the computer
 	 * 							will roll before holding
+	 * @requires	maximumRolls > 0
+	 * @ensure		this.maximumRolls.equals(maximumRolls) && maximumRolls > 0
 	 */
 	public void setMaximumRolls(int maximumRolls) {
+		if (maximumRolls < 0) {
+			throw new IllegalArgumentException("Invalid number of rolls.");
+		}
+		
 		this.maximumRolls = maximumRolls;
 	}
 
@@ -180,6 +192,7 @@ public abstract class AbstractPlayer implements Player {
 			int die1Value = this.thePair.getDie1Value();
 			int die2Value = this.thePair.getDie2Value();
 			if (die1Value == 1 || die2Value == 1) {
+				this.resetTurnTotal();
 				this.total -= this.turnTotal;
 				this.isMyTurn = false;
 				return;

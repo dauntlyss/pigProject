@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 /**
  * Game represents a Pig game.
- * @author CS6910
+ * @author CS6910, Alyssa Harris
  * @version Summer 2021
  */
 public class Game implements Observable {
@@ -35,12 +35,19 @@ public class Game implements Observable {
 	 *         				computerPlayer.equals(theComputer)
 	 */
 	public Game(HumanPlayer theHuman, ComputerPlayer theComputer) {
+		if (theHuman == null) {
+			throw new IllegalArgumentException("Invalid Human Player.");
+		}
+		if (theComputer == null) {
+			throw new IllegalArgumentException("Invalid Computer Player.");
+		}
 		this.theHuman = theHuman;
 		this.theComputer = theComputer;
 		
 		this.currentPlayerObject = new SimpleObjectProperty<Player>();
 		
 		this.thePair = new DicePair();
+		
 	}
 
 	/**
@@ -55,6 +62,10 @@ public class Game implements Observable {
 	 * 						firstPlayer.getTotal() == 0
 	 */
 	public void startNewGame(Player firstPlayer) {
+		if (firstPlayer == null) {
+			throw new IllegalArgumentException("Invalid First Player.");
+		}
+		
 		this.currentPlayerObject.setValue(firstPlayer); 
 			
 		this.thePair = new DicePair();		
@@ -69,6 +80,7 @@ public class Game implements Observable {
 	 * @ensures		!whoseTurn().equals(whoseTurn()@prev)
 	 */
 	public void play() {
+		
 		Player currentPlayer = this.currentPlayerObject.getValue();
 		this.currentPlayerObject.getValue().takeTurn();
 

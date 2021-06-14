@@ -27,6 +27,10 @@ public class StatusPane extends GridPane implements InvalidationListener {
 	 * @requires 	theGame != null
 	 */
 	public StatusPane(Game theGame) {
+		if (theGame == null) {
+			throw new IllegalArgumentException("Invalid Game argument.");
+		}
+		
 		this.theGame = theGame;
 		
 		this.theGame.addListener(this);

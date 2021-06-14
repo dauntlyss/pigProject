@@ -36,6 +36,10 @@ public class ComputerPane extends GridPane implements InvalidationListener {
 	 * @requires 	theGame != null
 	 */
 	public ComputerPane(Game theGame) {
+		if (theGame == null) {
+			throw new IllegalArgumentException("Invalid Game argument.");
+		}
+		
 		this.theGame = theGame;
 		
 		this.theGame.addListener(this);
@@ -78,6 +82,9 @@ public class ComputerPane extends GridPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable theObservable) {
+		if (theObservable == null) {
+			throw new IllegalArgumentException("Invalid Observable Object.");
+		}
 		boolean myTurn = this.theGame.getCurrentPlayer() == this.theComputer;
 		
 		if (!myTurn) {
