@@ -38,7 +38,6 @@ public abstract class AbstractPlayer implements Player {
 	 * @ensure		name().equals(name) && getTotal() == 0
 	 */
 	public AbstractPlayer() {
-		
 		this.name = NAME;
 		this.thePair = new DicePair();
 	
