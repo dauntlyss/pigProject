@@ -20,9 +20,9 @@ public class ComputerPlayerTestWhenSetTotal {
 	@Test
 	public void testSetTotalTo10WillSetTotalTo10() {
 		ComputerPlayer autoPlayer = new ComputerPlayer();
-//		autoPlayer.setTotal(10);
+		autoPlayer.setTotal(10);
 		
-		assertEquals(0, autoPlayer.getTurnTotal());
+		assertEquals(10, autoPlayer.getTotal());
 	}
 
 }
