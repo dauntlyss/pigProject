@@ -12,15 +12,17 @@ import edu.westga.cs6910.pig.model.ComputerPlayer;
  * @author Alyssa Harris
  * @version 06-15-21
  */
-public class ComputerPlayerTestWhenGetDicePair {
+public class ComputerPlayerTestWhenSetTotal {
 
 	/**
-	 * Test the computerPlayer's subclass inherited getThePair() method.
+	 * Test the computerPlayer's subclass inherited resetTurnTotal() method.
 	 */
 	@Test
-	public void testGetThePairGetsDicePairForComputerPlayer() {
+	public void testSetTotalTo10WillSetTotalTo10() {
 		ComputerPlayer autoPlayer = new ComputerPlayer();
+//		autoPlayer.setTotal(10);
 		
+		assertEquals(0, autoPlayer.getTurnTotal());
 	}
 
 }

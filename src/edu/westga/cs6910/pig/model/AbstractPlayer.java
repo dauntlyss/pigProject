@@ -70,21 +70,21 @@ public abstract class AbstractPlayer implements Player {
 		this.turnTotal = 0;
 	}
 
-	/**
-	 * sets the total score
-	 * @param total the total to set
-	 */
-	public void setTotal(int total) {
-		this.total = total;
-	}
+//	/**
+//	 * sets the total score
+//	 * @param total the total to set
+//	 */
+//	public void setTotal(int total) {
+//		this.total = total;
+//	}
 
-	/**
-	 * Sets the turn total
-	 * @param turnTotal the turnTotal to set
-	 */
-	public void setTurnTotal(int turnTotal) {
-		this.turnTotal = turnTotal;
-	}
+//	/**
+//	 * Sets the turn total
+//	 * @param turnTotal the turnTotal to set
+//	 */
+//	public void setTurnTotal(int turnTotal) {
+//		this.turnTotal = turnTotal;
+//	}
 
 	@Override	
 	/**
