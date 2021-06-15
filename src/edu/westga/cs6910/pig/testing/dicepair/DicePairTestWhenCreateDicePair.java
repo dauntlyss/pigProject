@@ -19,7 +19,7 @@ public class DicePairTestWhenCreateDicePair {
 	 * creates dicePair as expected.
 	 */
 	@Test
-	public void testDicePair() {
+	public void testDicePairConstructorCreatesNewDicePair() {
 		DicePair newDicePair = new DicePair();
 		assertEquals("pips: 1, 1", newDicePair.toString());
 	}

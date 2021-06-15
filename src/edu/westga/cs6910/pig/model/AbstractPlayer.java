@@ -44,12 +44,23 @@ public abstract class AbstractPlayer implements Player {
 	}
 	
 	/**
-	 * Returns Dice Pair
-	 * @return the thePair
+	 * Returns a string representation of the object
+	 * 
+	 * @return playerInfo	Player information
 	 */
-	public DicePair getThePair() {
-		return this.thePair;
+	public String toString() {
+		String playerInfo = "Player with name: " + this.name 
+				+ ", and new dice " + this.thePair.toString();
+		return playerInfo;
 	}
+	
+//	/**
+//	 * Returns Dice Pair
+//	 * @return the thePair
+//	 */
+//	public DicePair getThePair() {
+//		return this.thePair;
+//	}
 	
 	@Override
 	/**
