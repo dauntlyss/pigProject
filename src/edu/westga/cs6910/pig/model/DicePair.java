@@ -49,7 +49,7 @@ public class DicePair {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "pips: " + this.die1.getNumberOfPips() + ","
+		return "pips: " + this.die1.getNumberOfPips() + ", "
 				+ this.die2.getNumberOfPips();
 	}
 }
