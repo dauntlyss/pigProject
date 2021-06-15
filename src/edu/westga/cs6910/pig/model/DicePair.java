@@ -41,4 +41,15 @@ public class DicePair {
 	public int getDie2Value() {
 		return this.die2.getNumberOfPips();
 	}
+	
+	/**
+	 * Returns "pips: n" where n is the number of pips showing.
+	 * 
+	 * @return the String representation
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "pips: " + this.die1.getNumberOfPips() + ","
+				+ this.die2.getNumberOfPips();
+	}
 }
