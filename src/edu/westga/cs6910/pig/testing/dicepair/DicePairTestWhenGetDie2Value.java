@@ -12,16 +12,16 @@ import edu.westga.cs6910.pig.model.DicePair;
  * @author Alyssa Harris
  * @version 06-14-21
  */
-public class DicePairWhenCreateDicePair {
+public class DicePairTestWhenGetDie2Value {
 
 	/**
-	 * Tests the DicePair class's constructor to confirm that it 
-	 * creates dicePair as expected.
+	 * Tests the DicePair class's getDie2Value() method to confirm that it
+	 * displays the expected value.
 	 */
 	@Test
-	public void testDicePair() {
+	public void testGetDie2Value() {
 		DicePair newDicePair = new DicePair();
-		assertEquals("pips: 1, 1", newDicePair.toString());
+		assertEquals(1, newDicePair.getDie2Value());
 	}
 
 }
