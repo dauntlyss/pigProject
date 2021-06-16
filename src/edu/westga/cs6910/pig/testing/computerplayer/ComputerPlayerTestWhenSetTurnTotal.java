@@ -12,27 +12,27 @@ import edu.westga.cs6910.pig.model.ComputerPlayer;
  * @author Alyssa Harris
  * @version 06-15-21
  */
-public class ComputerPlayerTestWhenSetTotal {
+public class ComputerPlayerTestWhenSetTurnTotal {
 
 	/**
-	 * Test the computerPlayer's subclass setTotal() method.
+	 * Test the computerPlayer's subclass setTurnTotal() method.
 	 */
 	@Test
-	public void testSetTotalTo10WillSetTotalTo10() {
+	public void testSetTurnTotalTo10WillSetTurnTotalTo10() {
 		ComputerPlayer autoPlayer = new ComputerPlayer();
-		autoPlayer.setTotal(10);
+		autoPlayer.setTurnTotal(10);
 		
-		assertEquals(10, autoPlayer.getTotal());
+		assertEquals(10, autoPlayer.getTurnTotal());
 	}
 	
 	/**
-	 * Test the computerPlayer's subclass setTotal() method.
+	 * Test the computerPlayer's subclass setTurnTotal() method.
 	 */
 	@Test
-	public void testSetTotalTo1WillSetTotalTo1() {
+	public void testSetTurnTotalTo1WillSetTurnTotalTo1() {
 		ComputerPlayer autoPlayer = new ComputerPlayer();
-		autoPlayer.setTotal(1);
-		assertEquals(1, autoPlayer.getTotal());
+		autoPlayer.setTurnTotal(1);
+		assertEquals(1, autoPlayer.getTurnTotal());
 	}
 
 }

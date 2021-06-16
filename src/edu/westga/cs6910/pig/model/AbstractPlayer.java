@@ -54,14 +54,6 @@ public abstract class AbstractPlayer implements Player {
 		return playerInfo;
 	}
 	
-//	/**
-//	 * Returns Dice Pair
-//	 * @return the thePair
-//	 */
-//	public DicePair getThePair() {
-//		return this.thePair;
-//	}
-	
 	@Override
 	/**
 	 * @see Player#resetTurnTotal()
@@ -78,13 +70,13 @@ public abstract class AbstractPlayer implements Player {
 		this.total = total;
 	}
 
-//	/**
-//	 * Sets the turn total
-//	 * @param turnTotal the turnTotal to set
-//	 */
-//	public void setTurnTotal(int turnTotal) {
-//		this.turnTotal = turnTotal;
-//	}
+	/**
+	 * Sets the turn total
+	 * @param turnTotal the turnTotal to set
+	 */
+	public void setTurnTotal(int turnTotal) {
+		this.turnTotal = turnTotal;
+	}
 
 	@Override	
 	/**
