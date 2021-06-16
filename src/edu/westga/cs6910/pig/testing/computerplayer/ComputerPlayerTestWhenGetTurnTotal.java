@@ -15,7 +15,7 @@ import edu.westga.cs6910.pig.model.ComputerPlayer;
 public class ComputerPlayerTestWhenGetTurnTotal {
 
 	/**
-	 * Test Test the computerPlayer's subclass getTurnTotal() method.
+	 * Test the computerPlayer's subclass getTurnTotal() method.
 	 */
 	@Test
 	public void testGetTurnTotalFromNewPlayerWillReturnTurnTotal0() {
