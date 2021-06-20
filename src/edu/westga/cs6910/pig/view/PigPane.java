@@ -4,7 +4,11 @@ import edu.westga.cs6910.pig.model.Game;
 import edu.westga.cs6910.pig.model.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -25,6 +29,7 @@ public class PigPane extends BorderPane {
 	private ComputerPane pnComputerPlayer;
 	private StatusPane pnGameInfo;
 	private Pane pnChooseFirstPlayer;
+	private Pane menuPane;
 	
 	/**
 	 * Creates a pane object to provide the view for the specified
@@ -44,7 +49,9 @@ public class PigPane extends BorderPane {
 		
 		this.pnContent = new BorderPane();
 		
-		this.addFirstPlayerChooserPane(theGame);		
+		this.addFirstPlayerChooserPane(theGame);
+		
+		this.addMenuPane();
 		
 		HBox leftBox = new HBox();
 		leftBox.getStyleClass().add("pane-border");	
@@ -73,6 +80,14 @@ public class PigPane extends BorderPane {
 		this.pnChooseFirstPlayer = new NewGamePane(theGame);
 		topBox.getChildren().add(this.pnChooseFirstPlayer);
 		this.pnContent.setTop(topBox);
+	}
+	
+	private void addMenuPane() {
+		HBox menuBox = new HBox();
+		menuBox.getStyleClass().add("pane-border");	
+		this.menuPane = new MenuPane();
+		menuBox.getChildren().add(this.menuPane);
+		this.pnContent.setBottom(menuBox);
 	}
 
 	/**
@@ -147,6 +162,47 @@ public class PigPane extends BorderPane {
 				PigPane.this.theGame.startNewGame(NewGamePane.this.theHuman);
 
 			}
+		}
+	}
+	
+	private final class MenuPane extends GridPane {
+		private MenuBar menuBar;
+		private Menu gameMenu;
+		private Menu strategyMenu;
+		
+		private MenuPane() {
+			this.menuBar = new MenuBar();
+			this.gameMenu = new Menu("Game");
+			this.strategyMenu = new Menu("Strategy");
+			
+			this.buildMenuPane();	
+		}
+		
+		private void buildMenuPane() {
+			this.setHgap(20);
+
+			MenuItem exit = new MenuItem("Exit");
+			this.gameMenu.getItems().addAll(exit);
+			
+			RadioMenuItem cautiousStrategy = new RadioMenuItem("Cautious");
+			this.strategyMenu.setMnemonicParsing(true);
+			RadioMenuItem greedyStrategy = new RadioMenuItem("Greedy");
+			RadioMenuItem randomStrategy = new RadioMenuItem("Random");
+
+			ToggleGroup toggleGroup = new ToggleGroup();
+			cautiousStrategy.setToggleGroup(toggleGroup);
+			cautiousStrategy.setSelected(true);
+			greedyStrategy.setToggleGroup(toggleGroup);
+			randomStrategy.setToggleGroup(toggleGroup);
+			
+			this.strategyMenu.getItems().addAll(cautiousStrategy, greedyStrategy, randomStrategy);
+			
+			this.menuBar.getMenus().addAll(this.gameMenu, this.strategyMenu);
+			
+			HBox hBox = new HBox();
+			hBox.setSpacing(240);
+			hBox.getChildren().add(this.menuBar);
+			this.getChildren().add(hBox);
 		}
 	}
 }
