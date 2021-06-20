@@ -10,10 +10,12 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * Defines a GUI for the Pig game.
@@ -83,7 +85,7 @@ public class PigPane extends BorderPane {
 	}
 	
 	private void addMenuPane() {
-		HBox menuBox = new HBox();
+		VBox menuBox = new VBox();
 		menuBox.getStyleClass().add("pane-border");	
 		this.menuPane = new MenuPane();
 		menuBox.getChildren().add(this.menuPane);
@@ -170,39 +172,54 @@ public class PigPane extends BorderPane {
 		private Menu gameMenu;
 		private Menu strategyMenu;
 		
+		private MenuItem exit;
+		private RadioMenuItem cautiousStrategy;
+		private RadioMenuItem greedyStrategy;
+		private RadioMenuItem randomStrategy;
+		
 		private MenuPane() {
 			this.menuBar = new MenuBar();
-			this.gameMenu = new Menu("Game");
-			this.strategyMenu = new Menu("Strategy");
+			this.gameMenu = new Menu("_Game");
+			this.strategyMenu = new Menu("_Strategy");
 			
 			this.buildMenuPane();	
 		}
 		
 		private void buildMenuPane() {
-			this.setHgap(20);
-
-			MenuItem exit = new MenuItem("Exit");
-			this.gameMenu.getItems().addAll(exit);
+			this.exit = new MenuItem("E_xit");
+			this.exit.setAccelerator(KeyCombination.keyCombination("shortcut + X"));
+			this.gameMenu.getItems().addAll(this.exit);
+			this.gameMenu.setMnemonicParsing(true);
+			this.exit.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.exit(0);
+				}
+			});			
 			
-			RadioMenuItem cautiousStrategy = new RadioMenuItem("Cautious");
-			this.strategyMenu.setMnemonicParsing(true);
-			RadioMenuItem greedyStrategy = new RadioMenuItem("Greedy");
-			RadioMenuItem randomStrategy = new RadioMenuItem("Random");
+			this.cautiousStrategy = new RadioMenuItem("_Cautious");
+			this.cautiousStrategy.setAccelerator(KeyCombination.keyCombination("shortcut + C"));
+			this.greedyStrategy = new RadioMenuItem("Gr_eedy");
+			this.greedyStrategy.setAccelerator(KeyCombination.keyCombination("shortcut + E"));
+			this.randomStrategy = new RadioMenuItem("_Random");
+			this.randomStrategy.setAccelerator(KeyCombination.keyCombination("shortcut + R"));
 
 			ToggleGroup toggleGroup = new ToggleGroup();
-			cautiousStrategy.setToggleGroup(toggleGroup);
-			cautiousStrategy.setSelected(true);
-			greedyStrategy.setToggleGroup(toggleGroup);
-			randomStrategy.setToggleGroup(toggleGroup);
+			this.cautiousStrategy.setToggleGroup(toggleGroup);
+			this.cautiousStrategy.setSelected(true);
+			this.greedyStrategy.setToggleGroup(toggleGroup);
+			this.randomStrategy.setToggleGroup(toggleGroup);
 			
-			this.strategyMenu.getItems().addAll(cautiousStrategy, greedyStrategy, randomStrategy);
-			
+			this.strategyMenu.getItems().addAll(this.cautiousStrategy, this.greedyStrategy, this.randomStrategy);
+			this.strategyMenu.setMnemonicParsing(true);
 			this.menuBar.getMenus().addAll(this.gameMenu, this.strategyMenu);
 			
-			HBox hBox = new HBox();
-			hBox.setSpacing(240);
-			hBox.getChildren().add(this.menuBar);
-			this.getChildren().add(hBox);
-		}
+			VBox vBox = new VBox();
+			vBox.setSpacing(240);
+			vBox.getChildren().add(this.menuBar);
+			this.getChildren().add(vBox);
+			
+		}	
+		
 	}
 }
