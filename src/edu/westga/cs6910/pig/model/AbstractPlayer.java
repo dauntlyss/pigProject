@@ -46,7 +46,6 @@ public abstract class AbstractPlayer implements Player {
 		if (someStrategy == null) {
 			throw new IllegalArgumentException("Invalid strategy.");
 		}
-		this.strategy = someStrategy;
 		this.name = NAME;
 		this.thePair = new DicePair();
 	
@@ -197,6 +196,7 @@ public abstract class AbstractPlayer implements Player {
 	 * Processes a computer's turn
 	 */
 	private void computerTurn() {
+		
 		for (int count = 0; count < this.maximumRolls; count++) {
 			this.thePair.rollDice();
 			

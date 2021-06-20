@@ -22,7 +22,7 @@ public class ComputerPlayer extends AbstractPlayer {
 	
 	public ComputerPlayer(PigStrategy someStrategy) {
 		super(someStrategy);
-		this.strategy = someStrategy;
+		this.setStrategy(someStrategy);
 		
 	}
 
@@ -33,6 +33,18 @@ public class ComputerPlayer extends AbstractPlayer {
 	public void takeTurn() {
 		boolean computerTurn = true;
 		this.processTurn(computerTurn);		
+	}
+	
+	/**
+	 * Sets which strategy the player will use
+	 * 
+	 * @param someStrategy
+	 * 
+	 * @precondition	someStrategy != null
+	 * @postcondition	specified strategy will determine how the player will play
+	 */
+	public void setStrategy(PigStrategy someStrategy) {
+		this.strategy = someStrategy;
 	}
 
 }
