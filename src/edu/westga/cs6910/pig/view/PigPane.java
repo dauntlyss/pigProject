@@ -215,7 +215,7 @@ public class PigPane extends BorderPane {
 			this.menuBar.getMenus().addAll(this.gameMenu, this.strategyMenu);
 			
 			VBox vBox = new VBox();
-			vBox.setSpacing(240);
+			vBox.setSpacing(20);
 			vBox.getChildren().add(this.menuBar);
 			this.getChildren().add(vBox);
 			
