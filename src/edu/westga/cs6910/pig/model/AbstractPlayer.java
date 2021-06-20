@@ -1,5 +1,7 @@
 package edu.westga.cs6910.pig.model;
 
+import edu.westga.cs6910.pig.model.strategies.PigStrategy;
+
 /**
  * Implements the shared code from ComputerPlayer and HumanPlayer Classes
  * 
@@ -14,6 +16,7 @@ public abstract class AbstractPlayer implements Player {
 	private int turnTotal;
 	private int maximumRolls;
 	private String name;
+	private PigStrategy strategy;
 	
 	/**
 	 * Constructor used to create a human Player. 
@@ -34,10 +37,16 @@ public abstract class AbstractPlayer implements Player {
 	/**
 	 * Constructor used to create a computer Player. 
 	 * 
-	 * @requires	name != null
+	 * @param someStrategy	Strategy to be used
+	 * 
+	 * @requires	strategy != null 
 	 * @ensure		name().equals(name) && getTotal() == 0
 	 */
-	public AbstractPlayer() {
+	public AbstractPlayer(PigStrategy someStrategy) {
+		if (someStrategy == null) {
+			throw new IllegalArgumentException("Invalid strategy.");
+		}
+		this.strategy = someStrategy;
 		this.name = NAME;
 		this.thePair = new DicePair();
 	

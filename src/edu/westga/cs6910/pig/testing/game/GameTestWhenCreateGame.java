@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs6910.pig.model.ComputerPlayer;
 import edu.westga.cs6910.pig.model.Game;
 import edu.westga.cs6910.pig.model.HumanPlayer;
+import edu.westga.cs6910.pig.model.strategies.CautiousStrategy;
+import edu.westga.cs6910.pig.model.strategies.PigStrategy;
 
 /**
  * Tests to confirm Computer Player subclass is working correctly.
@@ -22,7 +24,8 @@ public class GameTestWhenCreateGame {
 	 */
 	@Test
 	public void testGameWithValidInputCreatesNewGame() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 		HumanPlayer realHumanPlayer = new HumanPlayer("Alyssa");
 		Game pigGame = new Game(realHumanPlayer, autoPlayer);
 		assertEquals("Goal Score: 20\r\n" 
@@ -35,7 +38,8 @@ public class GameTestWhenCreateGame {
 	@Test
 	public void testGameWithInvalidHumanThrowsProperError() {
 		try {
-			ComputerPlayer autoPlayer = new ComputerPlayer();
+			PigStrategy someStrategy = new CautiousStrategy();
+			ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 			Game pigGame = new Game(null, autoPlayer);
 	        pigGame.toString();     
 	        fail();

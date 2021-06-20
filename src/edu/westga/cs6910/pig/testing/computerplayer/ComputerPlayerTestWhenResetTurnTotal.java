@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs6910.pig.model.ComputerPlayer;
+import edu.westga.cs6910.pig.model.strategies.CautiousStrategy;
+import edu.westga.cs6910.pig.model.strategies.PigStrategy;
 
 /**
  * Tests to confirm Computer Player subclass is working correctly.
@@ -19,7 +21,8 @@ public class ComputerPlayerTestWhenResetTurnTotal {
 	 */
 	@Test
 	public void testResetTurnTotalResetsTurnTotalForComputerPlayer() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 		autoPlayer.setTurnTotal(5);
 		autoPlayer.resetTurnTotal();
 		
@@ -31,7 +34,8 @@ public class ComputerPlayerTestWhenResetTurnTotal {
 	 */
 	@Test
 	public void testResetTurnTotalResetsTurnTotalTo0ForComputerPlayer() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 		autoPlayer.setTurnTotal(50);
 		autoPlayer.resetTurnTotal();
 		

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs6910.pig.model.ComputerPlayer;
+import edu.westga.cs6910.pig.model.strategies.CautiousStrategy;
+import edu.westga.cs6910.pig.model.strategies.PigStrategy;
 
 /**
  * Tests to confirm Computer Player subclass is working correctly.
@@ -20,7 +22,8 @@ public class ComputerPlayerTestWhenGetTotal {
 	 */
 	@Test
 	public void testGetTotalFromNewPlayerWillReturnTotal0() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 
 		assertEquals(0, autoPlayer.getTotal());
 	}
@@ -30,7 +33,8 @@ public class ComputerPlayerTestWhenGetTotal {
 	 */
 	@Test
 	public void testGetTotalOf100WillGetTotalOf100() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 		autoPlayer.setTotal(100);
 		assertEquals(100, autoPlayer.getTotal());
 	}

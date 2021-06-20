@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs6910.pig.model.ComputerPlayer;
 import edu.westga.cs6910.pig.model.Game;
 import edu.westga.cs6910.pig.model.HumanPlayer;
+import edu.westga.cs6910.pig.model.strategies.CautiousStrategy;
+import edu.westga.cs6910.pig.model.strategies.PigStrategy;
 
 /**
  * Tests to confirm Computer Player subclass is working correctly.
@@ -21,7 +23,8 @@ public class GameTestWhenGetComputerPlayer {
 	 */
 	@Test
 	public void testGetComputerPlayerWillGetComputerPlayer() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 		HumanPlayer realHumanPlayer = new HumanPlayer("Alyssa");
 		Game pigGame = new Game(realHumanPlayer, autoPlayer);
 		assertEquals(autoPlayer, pigGame.getComputerPlayer());

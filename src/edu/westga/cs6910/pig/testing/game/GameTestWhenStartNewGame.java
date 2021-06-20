@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs6910.pig.model.ComputerPlayer;
 import edu.westga.cs6910.pig.model.Game;
 import edu.westga.cs6910.pig.model.HumanPlayer;
+import edu.westga.cs6910.pig.model.strategies.CautiousStrategy;
+import edu.westga.cs6910.pig.model.strategies.PigStrategy;
 
 /**
  * Tests to confirm Computer Player subclass is working correctly.
@@ -22,7 +24,8 @@ public class GameTestWhenStartNewGame {
 	 */
 	@Test
 	public void testStartNewGameWillStartNewGameWithHumanFirst() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 		HumanPlayer realHumanPlayer = new HumanPlayer("Alyssa");
 		Game pigGame = new Game(realHumanPlayer, autoPlayer);
 		pigGame.startNewGame(realHumanPlayer);
@@ -34,7 +37,8 @@ public class GameTestWhenStartNewGame {
 	 */
 	@Test
 	public void testStartNewGameWillStartNewGameWithComputerFirst() {
-		ComputerPlayer autoPlayer = new ComputerPlayer();
+		PigStrategy someStrategy = new CautiousStrategy();
+		ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 		HumanPlayer realHumanPlayer = new HumanPlayer("Alyssa");
 		Game pigGame = new Game(realHumanPlayer, autoPlayer);
 		pigGame.startNewGame(autoPlayer);
@@ -47,7 +51,8 @@ public class GameTestWhenStartNewGame {
 	@Test
 	public void testStartNewGameInvalidFirstPlayerThrowsProperError() {
 		try {
-			ComputerPlayer autoPlayer = new ComputerPlayer();
+			PigStrategy someStrategy = new CautiousStrategy();
+			ComputerPlayer autoPlayer = new ComputerPlayer(someStrategy);
 			HumanPlayer realHumanPlayer = new HumanPlayer("Alyssa");
 			Game pigGame = new Game(realHumanPlayer, autoPlayer);
 			pigGame.startNewGame(null);   
