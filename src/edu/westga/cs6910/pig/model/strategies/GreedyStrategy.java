@@ -23,10 +23,7 @@ public class GreedyStrategy implements PigStrategy {
 			return false;
 		}
 		return true;
-//		do {
-//			return true;
-//		} while (numberOfPointsThisTurn < 20 || pointsNeededToWin > 0);
-//		return !(totalRollsThisTurn > 3 || numberOfPointsThisTurn >= 20 || pointsNeededToWin <= 0);
+
 	}
 
 }
