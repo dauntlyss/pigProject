@@ -3,6 +3,7 @@ package edu.westga.cs6910.pig.view;
 import edu.westga.cs6910.pig.model.Game;
 import edu.westga.cs6910.pig.model.Player;
 import edu.westga.cs6910.pig.model.strategies.CautiousStrategy;
+import edu.westga.cs6910.pig.model.strategies.GreedyStrategy;
 import edu.westga.cs6910.pig.model.strategies.RandomStrategy;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -223,6 +224,12 @@ public class PigPane extends BorderPane {
 			});
 			this.greedyStrategy = new RadioMenuItem("Gr_eedy");
 			this.greedyStrategy.setAccelerator(KeyCombination.keyCombination("shortcut + E"));
+			this.greedyStrategy.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					MenuPane.this.theGame.getComputerPlayer().setStrategy(new GreedyStrategy());
+				}
+			});			
 			
 			this.randomStrategy = new RadioMenuItem("_Random");
 			this.randomStrategy.setAccelerator(KeyCombination.keyCombination("shortcut + R"));
