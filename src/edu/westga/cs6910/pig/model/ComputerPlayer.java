@@ -35,10 +35,12 @@ public class ComputerPlayer extends AbstractPlayer {
 	 */	
 	public void takeTurn() {
 		boolean computerTurn = true;
-		
+		int totalRollsThisTurn = 0;
 		do {
 			this.processTurn(computerTurn);
-		} while (this.strategy.rollAgain(0, 0, 20));
+			System.out.print(" " + this.getDiceValues() + " ");
+			totalRollsThisTurn++;
+		} while (this.strategy.rollAgain(totalRollsThisTurn, this.getTurnTotal(), (Game.GOAL_SCORE - this.getTotal())));
 				
 	}
 	
