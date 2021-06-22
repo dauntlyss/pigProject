@@ -21,9 +21,12 @@ public class ComputerPlayer extends AbstractPlayer {
 	 */
 	
 	public ComputerPlayer(PigStrategy someStrategy) {
-		super(someStrategy);
+		super();
+		if (someStrategy == null) {
+			throw new IllegalArgumentException("Invalid strategy.");
+		}
+		this.strategy = someStrategy;
 		this.setStrategy(someStrategy);
-		
 	}
 
 	@Override
@@ -32,7 +35,11 @@ public class ComputerPlayer extends AbstractPlayer {
 	 */	
 	public void takeTurn() {
 		boolean computerTurn = true;
-		this.processTurn(computerTurn);		
+		
+		do {
+			this.processTurn(computerTurn);
+		} while (this.strategy.rollAgain(0, 0, 20));
+				
 	}
 	
 	/**
@@ -44,6 +51,9 @@ public class ComputerPlayer extends AbstractPlayer {
 	 * @postcondition	specified strategy will determine how the player will play
 	 */
 	public void setStrategy(PigStrategy someStrategy) {
+		if (someStrategy == null) {
+			throw new IllegalArgumentException("Invalid strategy.");
+		}
 		this.strategy = someStrategy;
 	}
 

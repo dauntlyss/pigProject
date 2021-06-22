@@ -2,6 +2,7 @@ package edu.westga.cs6910.pig.view;
 
 import edu.westga.cs6910.pig.model.Game;
 import edu.westga.cs6910.pig.model.Player;
+import edu.westga.cs6910.pig.model.strategies.CautiousStrategy;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -15,7 +16,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 /**
  * Defines a GUI for the Pig game.
@@ -31,7 +31,7 @@ public class PigPane extends BorderPane {
 	private ComputerPane pnComputerPlayer;
 	private StatusPane pnGameInfo;
 	private Pane pnChooseFirstPlayer;
-	private Pane menuPane;
+	private MenuPane menuPane;
 	
 	/**
 	 * Creates a pane object to provide the view for the specified
@@ -53,27 +53,39 @@ public class PigPane extends BorderPane {
 		
 		this.addFirstPlayerChooserPane(theGame);
 		
-		this.addMenuPane();
+		this.addComputerPlayerInfoPane(theGame);
 		
-		HBox leftBox = new HBox();
-		leftBox.getStyleClass().add("pane-border");	
-		this.pnHumanPlayer = new HumanPane(theGame);
-		leftBox.getChildren().add(this.pnHumanPlayer);
-		this.pnContent.setLeft(leftBox);
-
+		this.addHumanPlayerInfoPane(theGame);
+		
+		this.addStatusPaneInfo(theGame);
+		
+		this.addMenuPane(theGame);
+		
+		this.setCenter(this.pnContent);
+	}
+	
+	private void addStatusPaneInfo(Game theGame) {
 		HBox centerBox = new HBox();
 		centerBox.getStyleClass().add("pane-border");	
 		this.pnGameInfo = new StatusPane(theGame);
 		centerBox.getChildren().add(this.pnGameInfo);
 		this.pnContent.setCenter(centerBox);
-
+	}
+	
+	private void addHumanPlayerInfoPane(Game theGame) {
+		HBox leftBox = new HBox();
+		leftBox.getStyleClass().add("pane-border");	
+		this.pnHumanPlayer = new HumanPane(theGame);
+		leftBox.getChildren().add(this.pnHumanPlayer);
+		this.pnContent.setLeft(leftBox);
+	}
+	
+	private void addComputerPlayerInfoPane(Game theGame) {
 		HBox rightBox = new HBox();
 		rightBox.getStyleClass().add("pane-border");	
 		this.pnComputerPlayer = new ComputerPane(theGame);
 		rightBox.getChildren().add(this.pnComputerPlayer);
 		this.pnContent.setRight(rightBox);
-		
-		this.setCenter(this.pnContent);
 	}
 
 	private void addFirstPlayerChooserPane(Game theGame) {
@@ -84,12 +96,12 @@ public class PigPane extends BorderPane {
 		this.pnContent.setTop(topBox);
 	}
 	
-	private void addMenuPane() {
-		VBox menuBox = new VBox();
-		menuBox.getStyleClass().add("pane-border");	
-		this.menuPane = new MenuPane();
+	private void addMenuPane(Game theGame) {
+		HBox menuBox = new HBox();	
+		this.menuPane = new MenuPane(this, theGame);
 		menuBox.getChildren().add(this.menuPane);
-		this.pnContent.setBottom(menuBox);
+		menuBox.prefWidthProperty().bind(this.widthProperty());
+		this.setTop(menuBox);
 	}
 
 	/**
@@ -171,16 +183,19 @@ public class PigPane extends BorderPane {
 		private MenuBar menuBar;
 		private Menu gameMenu;
 		private Menu strategyMenu;
-		
+		private Game theGame;
 		private MenuItem exit;
 		private RadioMenuItem cautiousStrategy;
 		private RadioMenuItem greedyStrategy;
 		private RadioMenuItem randomStrategy;
+		private PigPane thePigPane;
 		
-		private MenuPane() {
+		private MenuPane(PigPane thePigPane, Game theGame) {
+			this.theGame = theGame;
 			this.menuBar = new MenuBar();
 			this.gameMenu = new Menu("_Game");
 			this.strategyMenu = new Menu("_Strategy");
+			this.thePigPane = thePigPane;
 			
 			this.buildMenuPane();	
 		}
@@ -199,6 +214,12 @@ public class PigPane extends BorderPane {
 			
 			this.cautiousStrategy = new RadioMenuItem("_Cautious");
 			this.cautiousStrategy.setAccelerator(KeyCombination.keyCombination("shortcut + C"));
+			this.cautiousStrategy.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					MenuPane.this.theGame.getComputerPlayer().setStrategy(new CautiousStrategy());
+				}
+			});
 			this.greedyStrategy = new RadioMenuItem("Gr_eedy");
 			this.greedyStrategy.setAccelerator(KeyCombination.keyCombination("shortcut + E"));
 			this.randomStrategy = new RadioMenuItem("_Random");
@@ -213,11 +234,8 @@ public class PigPane extends BorderPane {
 			this.strategyMenu.getItems().addAll(this.cautiousStrategy, this.greedyStrategy, this.randomStrategy);
 			this.strategyMenu.setMnemonicParsing(true);
 			this.menuBar.getMenus().addAll(this.gameMenu, this.strategyMenu);
-			
-			VBox vBox = new VBox();
-			vBox.setSpacing(20);
-			vBox.getChildren().add(this.menuBar);
-			this.getChildren().add(vBox);
+			this.menuBar.prefWidthProperty().bind(this.thePigPane.widthProperty());
+			this.add(this.menuBar, 0, 0);
 			
 		}	
 		

@@ -1,7 +1,5 @@
 package edu.westga.cs6910.pig.model;
 
-import edu.westga.cs6910.pig.model.strategies.PigStrategy;
-
 /**
  * Implements the shared code from ComputerPlayer and HumanPlayer Classes
  * 
@@ -16,7 +14,6 @@ public abstract class AbstractPlayer implements Player {
 	private int turnTotal;
 	private int maximumRolls;
 	private String name;
-	private PigStrategy strategy;
 	
 	/**
 	 * Constructor used to create a human Player. 
@@ -37,15 +34,10 @@ public abstract class AbstractPlayer implements Player {
 	/**
 	 * Constructor used to create a computer Player. 
 	 * 
-	 * @param someStrategy	Strategy to be used
-	 * 
 	 * @requires	strategy != null 
 	 * @ensure		name().equals(name) && getTotal() == 0
 	 */
-	public AbstractPlayer(PigStrategy someStrategy) {
-		if (someStrategy == null) {
-			throw new IllegalArgumentException("Invalid strategy.");
-		}
+	public AbstractPlayer() {
 		this.name = NAME;
 		this.thePair = new DicePair();
 	
@@ -196,22 +188,21 @@ public abstract class AbstractPlayer implements Player {
 	 * Processes a computer's turn
 	 */
 	private void computerTurn() {
-		
-		for (int count = 0; count < this.maximumRolls; count++) {
-			this.thePair.rollDice();
+	
+		this.thePair.rollDice();
 			
-			int die1Value = this.thePair.getDie1Value();
-			int die2Value = this.thePair.getDie2Value();
-			if (die1Value == 1 || die2Value == 1) {
-				this.resetTurnTotal();
-				this.total -= this.turnTotal;
-				this.isMyTurn = false;
-				return;
-			} else {		
-				this.turnTotal = die1Value + die2Value;
-				this.total += die1Value + die2Value;		
-			}		
+		int die1Value = this.thePair.getDie1Value();
+		int die2Value = this.thePair.getDie2Value();
+		if (die1Value == 1 || die2Value == 1) {
+			this.resetTurnTotal();
+			this.total -= this.turnTotal;
+			this.isMyTurn = false;
+			return;
+		} else {		
+			this.turnTotal = die1Value + die2Value;
+			this.total += die1Value + die2Value;		
 		}
+		
 		this.isMyTurn = false;
 	}
 }
