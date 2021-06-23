@@ -12,16 +12,11 @@ public class GreedyStrategy implements PigStrategy {
 	@Override
 	public boolean rollAgain(int totalRollsThisTurn, int numberOfPointsThisTurn, int pointsNeededToWin) {
 
-		System.out.print(" :Rolled\n");
-		
 		if (pointsNeededToWin <= 0) {
-			System.out.print("PN2W < 0");
 			return false;
 		} else if (numberOfPointsThisTurn >= 20) {
-			System.out.print("Points > 20");
 			return false;
 		} else if (totalRollsThisTurn > 2) {
-			System.out.print("Turns > 3"); 
 			return false;
 		} 
 		return true;
