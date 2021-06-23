@@ -8,11 +8,10 @@ package edu.westga.cs6910.pig.model;
  */
 public abstract class AbstractPlayer implements Player {
 	private static final String NAME = "Simple computer";
-	private DicePair thePair;
-	private boolean isMyTurn;
 	private int total;
 	private int turnTotal;
-	private int maximumRolls;
+	private DicePair thePair;
+	private boolean isMyTurn;
 	private String name;
 	
 	/**
@@ -140,19 +139,16 @@ public abstract class AbstractPlayer implements Player {
 		if (maximumRolls < 0) {
 			throw new IllegalArgumentException("Invalid number of rolls.");
 		}
-		
-		this.maximumRolls = maximumRolls;
-	}
-
-	/**
-	 * Implements Player's setMaximumRolls() to set the 
-	 * maximum number of rolls to 1
-	 * 
-	 */
-	public void setMaximumRolls() {
-		this.maximumRolls = 1;
 	}
 	
+	/**
+	 * Gets the pair
+	 * @return thePair
+	 */
+	public DicePair getThePair() {
+		return this.thePair;
+	}
+
 	/**
 	 * Processes turns
 	 * 
@@ -190,19 +186,7 @@ public abstract class AbstractPlayer implements Player {
 	private void computerTurn() {
 	
 		this.thePair.rollDice();
-			
-		int die1Value = this.thePair.getDie1Value();
-		int die2Value = this.thePair.getDie2Value();
-		if (die1Value == 1 || die2Value == 1) {
-			this.resetTurnTotal();
-			this.total -= this.turnTotal;
-			this.isMyTurn = false;
-			return;
-		} else {		
-			this.turnTotal = die1Value + die2Value;
-			this.total += die1Value + die2Value;		
-		}
-		
-		this.isMyTurn = false;
+
 	}
+	
 }

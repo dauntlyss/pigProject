@@ -36,11 +36,28 @@ public class ComputerPlayer extends AbstractPlayer {
 	public void takeTurn() {
 		boolean computerTurn = true;
 		int totalRollsThisTurn = 0;
+		int theTotal = this.getTotal();
+		int theTurnTotal = this.getTurnTotal();
+		
 		do {
+			this.resetTurnTotal();
 			this.processTurn(computerTurn);
-			System.out.print(" " + this.getDiceValues() + " ");
 			totalRollsThisTurn++;
-		} while (this.strategy.rollAgain(totalRollsThisTurn, this.getTurnTotal(), (Game.GOAL_SCORE - this.getTotal())));
+			int die1Value = this.getThePair().getDie1Value();
+			int die2Value = this.getThePair().getDie2Value();
+			if (die1Value == 1 || die2Value == 1) {
+				this.resetTurnTotal();
+				theTotal -= theTurnTotal;
+
+			} else {		
+				theTurnTotal = die1Value + die2Value;
+				theTotal += die1Value + die2Value;
+			}
+			if (this.getDiceValues().contains("1")) {
+				computerTurn = false;
+				
+			}
+		} while (computerTurn && this.strategy.rollAgain(totalRollsThisTurn, theTurnTotal, (Game.GOAL_SCORE - theTotal)));
 				
 	}
 	
