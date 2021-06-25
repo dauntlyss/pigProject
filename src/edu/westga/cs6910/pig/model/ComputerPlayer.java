@@ -36,27 +36,16 @@ public class ComputerPlayer extends AbstractPlayer {
 	public void takeTurn() {
 		boolean computerTurn = true;
 		int totalRollsThisTurn = 0;
+		int previousTotal = this.getTotal();
 		
 		do {
-			int theTotal = this.getTotal();
-			int theTurnTotal = this.getTurnTotal();
 			this.processTurn(computerTurn);
-			totalRollsThisTurn++;
-			int die1Value = this.getThePair().getDie1Value();
-			int die2Value = this.getThePair().getDie2Value();
-			if (die1Value == 1 || die2Value == 1) {
-				this.resetTurnTotal();
-				theTotal -= theTurnTotal;
-
-			} else {		
-				System.out.print(theTotal + "," + theTurnTotal);
-				theTurnTotal = die1Value + die2Value;
-				theTotal += die1Value + die2Value;
-			}
 			if (this.getDiceValues().contains("1")) {
+				this.resetTurnTotal();
+				this.setTotal(previousTotal);
 				computerTurn = false;
-				
 			}
+			totalRollsThisTurn++;
 		} while (computerTurn && this.strategy.rollAgain(totalRollsThisTurn, this.getTurnTotal(), (Game.GOAL_SCORE - this.getTotal())));
 				
 	}
@@ -74,6 +63,7 @@ public class ComputerPlayer extends AbstractPlayer {
 			throw new IllegalArgumentException("Invalid strategy.");
 		}
 		this.strategy = someStrategy;
-	}
 
+	}
+	
 }

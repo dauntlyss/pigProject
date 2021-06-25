@@ -184,9 +184,18 @@ public abstract class AbstractPlayer implements Player {
 	 * Processes a computer's turn
 	 */
 	private void computerTurn() {
-	
-		this.thePair.rollDice();
 
+		this.thePair.rollDice();
+		int die1Value = this.thePair.getDie1Value();
+		int die2Value = this.thePair.getDie2Value();
+		if (die1Value == 1 || die2Value == 1) {
+			this.resetTurnTotal();
+			this.isMyTurn = false;
+			return;
+		} else {		
+			this.turnTotal = die1Value + die2Value;
+			this.total += die1Value + die2Value;		
+		}	
 	}
 	
 }
