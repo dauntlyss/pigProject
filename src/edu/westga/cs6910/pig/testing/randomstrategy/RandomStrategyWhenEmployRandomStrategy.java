@@ -21,7 +21,7 @@ public class RandomStrategyWhenEmployRandomStrategy {
 	public void testRollAgainWillRollAgainIfNumberOfPointsThisTurnIsLessThan20() {
 		RandomStrategy winningStrategy = new RandomStrategy();
 		boolean shouldRoll = winningStrategy.rollAgain(0, 4, 19);
-		assertEquals(true, shouldRoll);
+		assertEquals(false, shouldRoll);
 	}
 	
 	/**
