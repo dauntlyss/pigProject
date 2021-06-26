@@ -18,16 +18,6 @@ public class RandomStrategyWhenEmployRandomStrategy {
 	 * Test method for RandomStrategy's rollAgain(int, int, int) method.
 	 */
 	@Test
-	public void testRollAgainWillRollAgainIfNumberOfPointsThisTurnIsLessThan20() {
-		RandomStrategy winningStrategy = new RandomStrategy();
-		boolean shouldRoll = winningStrategy.rollAgain(0, 4, 19);
-		assertEquals(false, shouldRoll);
-	}
-	
-	/**
-	 * Test method for GreedyStrategy's rollAgain(int, int, int) method.
-	 */
-	@Test
 	public void testRollAgainWillNotRollAgainIfNumberOfPointsThisTurnIsMoreThan20() {
 		RandomStrategy winningStrategy = new RandomStrategy();
 		boolean shouldRoll = winningStrategy.rollAgain(0, 21, 22);
@@ -35,22 +25,12 @@ public class RandomStrategyWhenEmployRandomStrategy {
 	}
 	
 	/**
-	 * Test method for GreedyStrategy's rollAgain(int, int, int) method.
+	 * Test method for RandomStrategy's rollAgain(int, int, int) method.
 	 */
 	@Test
 	public void testRollAgainWillNotRollAgainIfPointsNeededToWinIs0() {
 		RandomStrategy winningStrategy = new RandomStrategy();
 		boolean shouldRoll = winningStrategy.rollAgain(0, 0, 0);
-		assertEquals(false, shouldRoll);
-	}
-
-	/**
-	 * Test method for GreedyStrategy's rollAgain(int, int, int) method.
-	 */
-	@Test
-	public void testRollAgainWillNotRollAgainIfPointsNeededToWinIsMoreThan0() {
-		RandomStrategy winningStrategy = new RandomStrategy();
-		boolean shouldRoll = winningStrategy.rollAgain(0, 20, 20);
 		assertEquals(false, shouldRoll);
 	}
 
