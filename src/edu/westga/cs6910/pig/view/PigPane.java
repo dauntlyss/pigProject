@@ -112,6 +112,7 @@ public class PigPane extends BorderPane {
 	private final class NewGamePane extends GridPane {
 		private RadioButton radHumanPlayer;
 		private RadioButton radComputerPlayer;
+		private RadioButton randomlyDecide;
 		
 		private Game theGame;
 		private Player theHuman;
@@ -129,6 +130,9 @@ public class PigPane extends BorderPane {
 		private void buildPane() {
 			this.setHgap(20);
 			
+			this.randomlyDecide = new RadioButton("Random first player");	
+			this.randomlyDecide.setOnAction(new RandomListener());
+			
 			this.radHumanPlayer = new RadioButton(this.theHuman.getName() + " first");	
 			this.radHumanPlayer.setOnAction(new HumanFirstListener());
 			
@@ -136,11 +140,13 @@ public class PigPane extends BorderPane {
 			this.radComputerPlayer.setOnAction(new ComputerFirstListener());
 
 			ToggleGroup turnToggle = new ToggleGroup();
+			this.randomlyDecide.setToggleGroup(turnToggle);
 			this.radComputerPlayer.setToggleGroup(turnToggle);
 			this.radHumanPlayer.setToggleGroup(turnToggle);
 
 			HBox hBox = new HBox();
 			hBox.setSpacing(20);
+			hBox.getChildren().add(this.randomlyDecide);
 			hBox.getChildren().add(this.radHumanPlayer);
 			hBox.getChildren().add(this.radComputerPlayer);
 			this.getChildren().add(hBox);
@@ -177,6 +183,30 @@ public class PigPane extends BorderPane {
 				PigPane.this.pnComputerPlayer.setDisable(true);
 				PigPane.this.theGame.startNewGame(NewGamePane.this.theHuman);
 
+			}
+		}
+		
+		/** 
+		 * Defines the listener for randomly determining first player button.
+		 */	
+		private class RandomListener implements EventHandler<ActionEvent> {
+			/** 
+			 * Sets up user interface and starts a new game. 
+			 * Event handler for a click in the human player button.
+			 */
+			@Override
+			public void handle(ActionEvent event) {
+				int number = (int) (Math.random() * 10);
+				if (number < 5) {
+					PigPane.this.pnChooseFirstPlayer.setDisable(true);
+					PigPane.this.pnComputerPlayer.setDisable(true);
+					PigPane.this.theGame.startNewGame(NewGamePane.this.theHuman);
+				} else {
+					PigPane.this.pnComputerPlayer.setDisable(false);
+					PigPane.this.pnChooseFirstPlayer.setDisable(true);
+					PigPane.this.theGame.startNewGame(NewGamePane.this.theComputer);
+				}
+				
 			}
 		}
 	}
