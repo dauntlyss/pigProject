@@ -192,7 +192,7 @@ public class PigPane extends BorderPane {
 		private class RandomListener implements EventHandler<ActionEvent> {
 			/** 
 			 * Sets up user interface and starts a new game. 
-			 * Event handler for a click in the human player button.
+			 * Event handler for a click in the random button.
 			 */
 			@Override
 			public void handle(ActionEvent event) {
