@@ -101,6 +101,10 @@ public abstract class AbstractPlayer implements Player {
 		return this.name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	@Override	
 	/**
 	 * @see Player#getTurnTotal()
