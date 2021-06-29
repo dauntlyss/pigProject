@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 public class StatusPane extends GridPane implements InvalidationListener {
 	private Game theGame;
 	private Label lblStatus;
+	private Label lblRundown;
 	private Button instructions;
 	
 	/**
@@ -52,23 +53,33 @@ public class StatusPane extends GridPane implements InvalidationListener {
 		topBox.getChildren().add(this.instructions);
 		this.add(topBox, 0, 0);
 		
-		HBox middleBox = new HBox();
-		middleBox.getStyleClass().add("box-center");	
-		middleBox.getStyleClass().add("box-padding");
-		middleBox.getChildren().addAll(new Label("~~ Game Info ~~"));
-		this.add(middleBox, 0, 1);
-		
 		HBox bottomBox = new HBox();
 		bottomBox.getStyleClass().add("box-padding");
 		this.lblStatus = new Label(this.theGame.toString());
-		bottomBox.getChildren().add(this.lblStatus);
+		bottomBox.getChildren().addAll(this.lblStatus);
 		this.add(bottomBox, 0, 2);
+		
+		HBox lowestBox = new HBox();
+		lowestBox.getStyleClass().add("box-padding");
+		this.lblRundown = new Label(this.theGame.showRundown());
+		lowestBox.getChildren().add(this.lblRundown);
+		this.add(lowestBox, 0, 4);
 		
 	}
 
 	@Override
 	public void invalidated(Observable observable) {
 		this.lblStatus.setText(this.theGame.toString());
+	}
+	
+	private class RundownListener implements EventHandler<ActionEvent> {
+		/**
+		 * Changes the label text accordingly
+		 */
+		@Override
+	    public void handle(ActionEvent event) {
+	        StatusPane.this.lblRundown.setText(StatusPane.this.theGame.showRundown());
+	    }
 	}
 	
 	private class InstructionsListener implements EventHandler<ActionEvent> {

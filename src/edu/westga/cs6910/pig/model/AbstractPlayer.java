@@ -101,6 +101,10 @@ public abstract class AbstractPlayer implements Player {
 		return this.name;
 	}
 	
+	/**
+	 * Sets the name variable
+	 * @param name	the name variable to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}

@@ -165,7 +165,7 @@ public class Game implements Observable {
 	 * @return a String representation of this Game
 	 */
 	public String toString() {	
-		String result = "Goal Score: " + GOAL_SCORE;
+		String result = "~~ Game Info ~~\n Goal Score: " + GOAL_SCORE;
 		result += System.getProperty("line.separator")
 				+ this.theHuman.getName() + ": "
 				+ this.theHuman.getTotal();
@@ -182,6 +182,31 @@ public class Game implements Observable {
 		} else {
 			return result;
 		}
+	}
+	
+	/**
+	 * Returns a String showing a synopsis of the roll and encouraging words
+	 * or trash talk.
+	 * 
+	 * @return rundown	the synopsis and analysis of the game as it goes on
+	 */
+	public String showRundown() {
+		String rundown = "";
+		if (this.theComputer.getTotal() == 0 && this.theHuman.getTotal() == 0) {
+			rundown = "Good luck to both players!";
+		} else if (this.theComputer.getTotal() == 10) {
+			rundown = this.theComputer.getName() + " is halfway to a win!";
+		} else if (this.theHuman.getTotal() == 10) {
+			rundown = this.theHuman.getName() + " is halfway to a win!";
+		} else if ((this.theComputer.getTotal() - Game.GOAL_SCORE) == 5) {
+			rundown = this.theComputer.getName() + " is almost to the goal score!";
+		} else if ((this.theHuman.getTotal() - Game.GOAL_SCORE) == 5) {
+			rundown = this.theHuman.getName() + " is almost to the goal score!";
+		} else if ((this.theComputer.getTotal() - Game.GOAL_SCORE) == 0 || (this.theHuman.getTotal() - Game.GOAL_SCORE) == 0) {
+			rundown = "Congrats, " + this.getCurrentPlayer().getName();
+		}
+		
+		return rundown;
 	}
 
 	private void swapWhoseTurn() {
